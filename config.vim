@@ -329,6 +329,8 @@ let g:neomake_virtualtext_current_error = 0
 
 " file finder mapping
 nmap ,e :Files<CR>
+" latest file being worked on
+nmap ,h :History<CR>
 " tags (symbols) in current file finder mapping
 nmap ,g :BTag<CR>
 " the same, but with the word under the cursor pre filled
