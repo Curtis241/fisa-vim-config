@@ -77,8 +77,10 @@ Plug 'patstockwell/vim-monokai-tasty'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Code and files fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" Autosave
+Plug 'vim-scripts/vim-auto-save'
 " Pending tasks list
 Plug 'fisadev/FixedTaskList.vim'
 " Async autocompletion
@@ -261,11 +263,17 @@ set shell=/bin/bash
 
 " Ability to add python breakpoints
 " (I use ipdb, but you can change it to whatever tool you use for debugging)
-au FileType python map <silent> <leader>b Oimport ipdb; ipdb.set_trace()<esc>
+au FileType python map <silent> <leader>b import ipdb; ipdb.set_trace()<esc>
 
 " ============================================================================
 " Plugins settings and mappings
 " Edit them as you wish.
+
+" Autosave -----------------------------
+" enable AutoSave on Vim startup
+let g:auto_save = 1
+" do not save while in insert mode
+let g:auto_save_in_insert_mode = 0
 
 " Tagbar -----------------------------
 
@@ -353,9 +361,7 @@ nmap ,c :Commands<CR>
 " Deoplete -----------------------------
 
 " Use deoplete.
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
+call deoplete#custom#option({'enable_at_startup':1, 'enable_ignore_case':1, 'enable_smart_case': 1})
 " complete with words from any opened file
 let g:context_filetype#same_filetypes = {}
 let g:context_filetype#same_filetypes._ = '_'
@@ -406,7 +412,7 @@ highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 " Autoclose ------------------------------
 
-" Fix to let ESC work as espected with Autoclose plugin
+" Fix to let ESC work as expected with Autoclose plugin
 " (without this, when showing an autocompletion window, ESC won't leave insert
 "  mode)
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
