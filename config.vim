@@ -136,6 +136,9 @@ Plug 'neomake/neomake'
 Plug 'myusuf3/numbers.vim'
 " Nice icons in the file explorer and file type status line.
 Plug 'ryanoasis/vim-devicons'
+" Removes whitespace on save
+Plug 'srstevenson/vim-trim-whitespace'
+
 
 if using_vim
     " Consoles as buffers (neovim has its own consoles as buffers)
@@ -255,7 +258,7 @@ set scrolloff=3
 nnoremap <silent> // :noh<CR>
 
 " clear empty spaces at the end of lines on save of python files
-autocmd BufWritePre *.py :%s/\s\+$//e
+"autocmd BufWritePre *.py :%s/\s\+$//e
 
 " fix problems with uncommon shells (fish, xonsh) and plugins running commands
 " (neomake, ...)
@@ -453,6 +456,14 @@ if fancy_symbols_enabled
 else
     let g:webdevicons_enable = 0
 endif
+
+"vim-trim-whitespace ---------------------------
+" Removes whitespace on save
+let g:topiary_ft_disabled = ['diff']
+let g:topiary_ft_allow_two_blank_lines = ['python']
+
+
+
 
 " Custom configurations ----------------
 
